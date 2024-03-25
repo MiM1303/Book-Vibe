@@ -1,4 +1,6 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const BookDetail = () => {
@@ -9,6 +11,64 @@ const BookDetail = () => {
     const book = books.find(book => book.bookId === idInt);
     const {bookName, author, image, rating, category, tags, review, totalPages, publisher, yearOfPublishing} = book;
     // console.log(book);
+
+
+    const getStoredReadBooks = ()=>{
+        const storedReadBooks = localStorage.getItem('read-books');
+        if(storedReadBooks){
+            return JSON.parse(storedReadBooks);
+        }
+        return [];
+    }
+    
+    const getStoredWishlistBooks = ()=>{
+        const storedWishlistBooks = localStorage.getItem('wishlist-books');
+        if(storedWishlistBooks){
+            return JSON.parse(storedWishlistBooks);
+        }
+        return [];
+    }
+    
+    const saveReadBooks = id =>{
+        const storedReadBooks = getStoredReadBooks();
+        const exists = storedReadBooks.find(bookId => bookId === id);
+        if(!exists){
+            storedReadBooks.push(id);
+            localStorage.setItem('read-books', JSON.stringify(storedReadBooks));
+            toast.success("Book marked as read!");
+        }
+        else{
+            toast.error("Book is already added in read!")
+        }
+    }
+    
+    const saveWishlistBooks = id =>{
+        const storedWishlistBooks = getStoredWishlistBooks();
+        const storedReadBooks = getStoredReadBooks();
+        const exists = storedWishlistBooks.find(bookId => bookId === id);
+        const existsInRead = storedReadBooks.find(bookId => bookId === id);
+        if(!exists && !existsInRead){
+            storedWishlistBooks.push(id);
+            localStorage.setItem('wishlist-books', JSON.stringify(storedWishlistBooks));
+            toast.success("Book added to wishlist!");
+        }
+        else if(existsInRead)
+        {
+            toast.error("Book has already been read before!")
+        }
+        else{
+            toast.error("Book is already in wishlist!")
+        }
+    }
+
+    const handleRead = ()=>{
+        saveReadBooks(bookId);
+    }
+
+    const handleWishlist = ()=>{
+        saveWishlistBooks(bookId);
+    }
+
     return (
         <div>
             <div className="flex gap-8 card lg:card-side bg-base-100">
@@ -54,16 +114,13 @@ const BookDetail = () => {
                             </tbody>
                         </table>
                     </div>
-                    {/* <p>Number of Pages: <span>{totalPages}</span></p>
-                    <p>Publisher: <span>{totalPages}</span></p>
-                    <p>Number of Pages: <span>{totalPages}</span></p>
-                    <p>Number of Pages: <span>{totalPages}</span></p> */}
                     <div className="font-semibold text-lg font-work">
-                        <button className="btn mr-4 py-5 px-7 bg-transparent border-[#1313134D] text-[#131313]">Read</button>
-                        <button className="btn py-5 px-7 bg-[#50B1C9] border-none text-white">Wishlist</button>
+                        <button onClick={handleRead} className="btn mr-4 py-5 px-7 bg-transparent border-[#1313134D] text-[#131313]">Read</button>
+                        <button onClick={handleWishlist} className="btn py-5 px-7 bg-[#50B1C9] border-none text-white">Wishlist</button>
                     </div>
                 </div>
             </div>
+            <ToastContainer></ToastContainer>
         </div>
     );
 };
