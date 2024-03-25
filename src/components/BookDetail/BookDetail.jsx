@@ -62,11 +62,11 @@ const BookDetail = () => {
     }
 
     const handleRead = ()=>{
-        saveReadBooks(bookId);
+        saveReadBooks(parseInt(bookId));
     }
 
     const handleWishlist = ()=>{
-        saveWishlistBooks(bookId);
+        saveWishlistBooks(parseInt(bookId));
     }
 
     return (

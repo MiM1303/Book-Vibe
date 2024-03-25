@@ -23,7 +23,6 @@ const saveReadBooks = id =>{
     if(!exists){
         storedReadBooks.push(id);
         localStorage.setItem('read-books', JSON.stringify(storedReadBooks));
-        toast.success("Book marked as read!!");
     }
 }
 
