@@ -1,4 +1,4 @@
-import { BarChart, Tooltip, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { BarChart, ResponsiveContainer, Tooltip, Bar, Cell, XAxis, YAxis, CartesianGrid } from 'recharts';
 
 const colors = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', 'red', 'pink'];
 
@@ -28,6 +28,7 @@ const data= readBooks.map(book => {
     };
   });
   return (
+    <ResponsiveContainer width="100%" height={400}>
     <BarChart className='flex justify-center items-center'
     width={1400}
     height={600}
@@ -49,5 +50,6 @@ const data= readBooks.map(book => {
       ))}
     </Bar>
   </BarChart>
+  </ResponsiveContainer>
   );
 }

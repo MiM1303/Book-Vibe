@@ -80,18 +80,7 @@ const ListedBooks = () => {
             setSorted(sortedBooks);
         }        
     }
-    // console.log('sorted after rating click', sorted);
-
-    // console.log(ratingSorted);
-    // console.log('readbooks',readBooks);
-    // console.log('...readbooks',[...readBooks]);
-    // const handleRating = ()=>{
-    //     if(tabIndex===0)
-    //     {
-    //         const sorted = list.sort((a, b) => b.rating - a.rating);
-    //     }
-    // }
-
+    
    
 
     return (
