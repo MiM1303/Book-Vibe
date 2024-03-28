@@ -1,6 +1,7 @@
 import { LuUsers } from "react-icons/lu";
 import { MdOutlineFindInPage } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { CiLocationOn } from "react-icons/ci";
 
 const ListedBook = ({book}) => {
     const {author, bookName, tags, yearOfPublishing, publisher, totalPages, category, rating, image, bookId}=book;
@@ -14,9 +15,10 @@ const ListedBook = ({book}) => {
                     <div className="flex gap-3 items-center"><span className="font-bold">Tag : </span>
                         <div className="flex gap-3">
                         {
-                            tags.map(tag=> <p key={tag.index} className="font-work px-4 py-2 text-base font-medium rounded-full bg-[#23BE0A0D] text-[#23BE0A]">{tag}</p>)
+                            tags.map((tag, index)=> <p key={index} className="font-work px-4 py-2 text-base font-medium rounded-full bg-[#23BE0A0D] text-[#23BE0A]">{tag}</p>)
                         }
                         </div>
+                        <div className="ml-6 flex items-center gap-2"><CiLocationOn /> Year of Publishing: {yearOfPublishing}</div>
                     </div>
                     <div className="flex gap-6">
                         <div className="flex gap-3 items-center"><LuUsers /><span>Publisher: {publisher}</span></div>
