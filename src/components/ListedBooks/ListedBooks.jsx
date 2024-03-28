@@ -18,7 +18,8 @@ const ListedBooks = () => {
             if(readBookIds.length > 0)
             {
                 const readBookDetails = books.filter(book=> readBookIds.includes(book.bookId));
-                setReadBooks(readBookDetails);
+                // setReadBooks(readBookDetails);
+                setList(readBookDetails);
                 // console.log(books, readBookIds, readBookDetails);
             }
         },[])

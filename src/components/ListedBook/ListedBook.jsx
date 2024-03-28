@@ -1,8 +1,9 @@
 import { LuUsers } from "react-icons/lu";
 import { MdOutlineFindInPage } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const ListedBook = ({book}) => {
-    const {author, bookName, tags, yearOfPublishing, publisher, totalPages, category, rating, image}=book;
+    const {author, bookName, tags, yearOfPublishing, publisher, totalPages, category, rating, image, bookId}=book;
     return (
         <div>
             <div className="flex flex-col lg:flex-row  card border border-[#e9e4e4] p-6 card-side bg-base-100 ">
@@ -25,7 +26,7 @@ const ListedBook = ({book}) => {
                     <div className="flex gap-3">
                         <button>Category: {category}</button>
                         <button>Rating: {rating}</button>
-                        <button className="btn">View Details</button>
+                        <Link to={`/book-details/${bookId}`}><button className="btn">View Details</button></Link>
                     </div>
                 </div>
             </div>
